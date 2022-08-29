@@ -9,15 +9,14 @@ function Citybook() {
         <>
             <div className="col-6">
                 <h4>Anacab City Taxi Booking</h4>
-                <form onSubmit={() => { Navigate("/cityverify") }}>
-                   
+                <form onSubmit={() => { Navigate("/cityverify") }} autoComplete="off">
                     <div className="row">
                         <label htmlFor="pickup"><b>Pickup Location:</b></label>
-                            <input style={{ width: 450 }} id="pickup" type="text" placeholder="Enter your Location" name="from" className="form-control"
-                                onChange={Achange} required="required" />
+                        <input style={{ width: 450 }} id="pickup" type="text" placeholder="Enter your Location" name="from" className="form-control"
+                            onChange={Achange} required="required" />
                         <label htmlFor="drop"><b>Drop Location:</b></label>
-                            <input style={{ width: 450 }} id="drop" type="text" placeholder="Enter your Location" name="to" className="form-control"
-                                onChange={Achange} required="required" />
+                        <input style={{ width: 450 }} id="drop" type="text" placeholder="Enter your Location" name="to" className="form-control"
+                            onChange={Achange} required="required" />
                         <label htmlFor="time"><b>Time:</b></label>
                         <input style={{ width: 350 }} id="time" type="time" name="time" className="form-control"
                             onChange={Achange} required="required" />

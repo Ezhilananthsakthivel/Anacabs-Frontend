@@ -4,14 +4,11 @@ function Homevehicles() {
     return (
         <div className="container">
             <div className="row">
-                <div className="col-2"></div>
+                <div className="col-3"></div>
                 <div className="col-8">
                     <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel">
                         <div className="carousel-inner">
                             <div className="carousel-item active">
-                                <img src="./images/auto.png" />
-                            </div>
-                            <div className="carousel-item">
                                 <img src="./images/mini.png" />
                             </div>
                             <div className="carousel-item">
@@ -31,8 +28,6 @@ function Homevehicles() {
                         </button>
                     </div>
                 </div>
-
-
             </div>
         </div>
     );

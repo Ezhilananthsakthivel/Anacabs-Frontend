@@ -11,7 +11,7 @@ function Dtable() {
 
     async function getdrivers() {
         try {
-            const { data } = await axios.get("https://anacabs.herokuapp.com/api/drivers", {
+            const { data } = await axios.get("http://localhost:3001/api/drivers", {
                 headers: {
                     "Authorization": `Bearer ${Aauth}`
                 }
@@ -19,9 +19,9 @@ function Dtable() {
             setdrivers(data);
             setloading(false)
         } catch ({ response: { data, status } }) {
-            if (status.includes("403")) {
+            if (status == "403" || status == "401") {
                 window.localStorage.clear();
-                Navigate("/dlogin", { replace: true })
+                Navigate("/alogin", { replace: true })
             }
             else {
                 alert(data.error)
@@ -31,7 +31,7 @@ function Dtable() {
     async function Ddelete(d) {
         try {
             if (window.confirm(`Delete ${d.uname}`)) {
-                const { data } = await axios.delete(`https://anacabs.herokuapp.com/api/drivers/${d._id}`, {
+                const { data } = await axios.delete(`http://localhost:3001/api/drivers/${d._id}`, {
                     headers: {
                         "Authorization": `Bearer ${Aauth}`
                     }
@@ -39,7 +39,7 @@ function Dtable() {
                 getdrivers()
             }
         } catch ({ response: { data, status } }) {
-            if (status.includes("403")) {
+            if (status == "403" || status == "401") {
                 window.localStorage.clear();
                 Navigate("/alogin", { replace: true })
             }
@@ -48,23 +48,23 @@ function Dtable() {
             }
         }
     }
-    async function Dedit(d) {
-        try {
-            const { data } = await axios.put(`https://anacabs.herokuapp.com/api/drivers/${d._id}`, {
-                headers: {
-                    "Authorization": `Bearer ${Aauth}`
-                }
-            })
-        } catch ({ response: { data, status } }) {
-            if (status.includes("403")) {
-                window.localStorage.clear();
-                Navigate("/alogin", { replace: true })
-            }
-            else {
-                alert(data.error)
-            }
-        }
-    }
+    // async function Dedit(d) {
+    //     try {
+    //         const { data } = await axios.put(`http://localhost:3001/api/drivers/${d._id}`, {
+    //             headers: {
+    //                 "Authorization": `Bearer ${Aauth}`
+    //             }
+    //         })
+    //     } catch ({ response: { data, status } }) {
+    //         if (status == "403" || status == "401") {
+    //             window.localStorage.clear();
+    //             Navigate("/alogin", { replace: true })
+    //         }
+    //         else {
+    //             alert(data.error)
+    //         }
+    //     }
+    // }
     useEffect(() => {
         getdrivers();
     }, []);
@@ -88,7 +88,7 @@ function Dtable() {
                             <tbody>
                                 {drivers.map((d) => {
                                     return (
-                                        <tr key={d._id}>
+                                        <tr key={d._id} onClick={() => Navigate("/drivers/orders", { state: { uname: d.uname } })}>
                                             <td>{++count}</td>
                                             <td>{d.cnumber}</td>
                                             <td>{d.fname}</td>

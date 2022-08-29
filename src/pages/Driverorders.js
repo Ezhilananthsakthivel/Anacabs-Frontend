@@ -1,46 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import axios from "axios"
 
-function Dhtable() {
+function Driverorders() {
     const Navigate = useNavigate()
-    const [loading, setloading] = useState(true)
+    const { state } = useLocation()
     const [orders, setorders] = useState([])
     let count = 0
-    const Dauth = window.localStorage.getItem("Dauth")
-    async function didorders() {
+    const Aauth = window.localStorage.getItem("Aauth")
+
+    async function getorders() {
         try {
-            const { data } = await axios.get("http://localhost:3001/api/bookings/didorders", {
+            const { data } = await axios.post("http://localhost:3001/api/bookings/driverorders", { uname: state.uname }, {
                 headers: {
-                    "Authorization": `Bearer ${Dauth}`
+                    "Authorization": `Bearer ${Aauth}`
                 }
             });
             setorders(data);
-            setloading(false)
         } catch ({ response: { data, status } }) {
             if (status == "403" || status == "401") {
                 window.localStorage.clear();
-                Navigate("/dlogin", { replace: true })
-            }
-            else {
-                alert(data.error)
-            }
-        }
-    }
-    async function Ocomplete(Order) {
-        try {
-            setloading(true)
-            const { data } = await axios.put(`http://localhost:3001/api/bookings/cupdate/${Order._id}`, Order, {
-                headers: {
-                    "Authorization": `Bearer ${Dauth}`
-                }
-            });
-            didorders()
-            setloading(false)
-        } catch ({ response: { data, status } }) {
-            if (status == "403" || status == "401") {
-                window.localStorage.clear();
-                Navigate("/dlogin", { replace: true })
+                Navigate("/alogin", { replace: true })
             }
             else {
                 alert(data.error)
@@ -48,7 +28,7 @@ function Dhtable() {
         }
     }
     useEffect(() => {
-        didorders();
+        getorders();
     }, []);
     return (
         <>
@@ -59,8 +39,8 @@ function Dhtable() {
                             <thead>
                                 <tr>
                                     <th>S.no</th>
-                                    <th>Date</th>
                                     <th>Time</th>
+                                    <th>Date</th>
                                     <th>From</th>
                                     <th>To</th>
                                     <th>Phone Number</th>
@@ -72,27 +52,17 @@ function Dhtable() {
                                     return (
                                         <tr key={o._id}>
                                             <td>{++count}</td>
-                                            <td>{o.date}</td>
                                             <td>{o.time}</td>
+                                            <td>{o.date}</td>
                                             <td>{o.from}</td>
                                             <td>{o.to}</td>
                                             <td>{o.pnumber}</td>
-                                            {o.status === "Accepted" ?
-                                                <td><button onClick={() => {
-                                                    Ocomplete(o)
-                                                }} className="btn btn-outline-primary">Complete</button></td>
-                                                : <td>{o.status}</td>
-                                            }
+                                            <td>{o.status}</td>
                                         </tr>
                                     )
                                 })}
                             </tbody>
                         </table>
-                        {loading &&
-                            <div className="d-flex justify-content-center">
-                                <img src="./images/loading.gif" />
-                            </div>
-                        }
                     </div>
                 </div>
             </div>
@@ -101,4 +71,4 @@ function Dhtable() {
     );
 }
 
-export default Dhtable;
+export default Driverorders;

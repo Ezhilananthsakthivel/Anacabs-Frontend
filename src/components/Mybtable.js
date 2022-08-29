@@ -1,22 +1,23 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"
-import axios from "axios"
 
-function Btable() {
-    const Navigate = useNavigate();
+function Mybtable() {
+    const [bookings, setbookings] = useState([])
     const [loading, setloading] = useState(true)
-    const [orders, setorders] = useState([])
+    const Navigate = useNavigate()
     let count = 0
-    const Aauth = window.localStorage.getItem("Aauth")
-    async function getorders() {
+    const Uauth = window.localStorage.getItem("Uauth")
+
+    async function Ubookings() {
         try {
-            const { data } = await axios.get("http://localhost:3001/api/bookings", {
+            const { data } = await axios.get("http://localhost:3001/api/bookings/ubookings", {
                 headers: {
-                    "Authorization": `Bearer ${Aauth}`
+                    "Authorization": `Bearer ${Uauth}`
                 }
-            });
-            setorders(data);
+            })
             setloading(false)
+            setbookings(data);
         } catch ({ response: { data, status } }) {
             if (status == "403" || status == "401") {
                 window.localStorage.clear();
@@ -28,7 +29,7 @@ function Btable() {
         }
     }
     useEffect(() => {
-        getorders();
+        Ubookings();
     }, []);
     return (
         <>
@@ -39,27 +40,25 @@ function Btable() {
                             <thead>
                                 <tr>
                                     <th>S.no</th>
-                                    <th>Time</th>
                                     <th>Date</th>
+                                    <th>Time</th>
                                     <th>From</th>
                                     <th>To</th>
                                     <th>Phone Number</th>
-                                    <th>Driver</th>
-                                    <th>Ststus</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {orders.map((o) => {
+                                {bookings.map((b) => {
                                     return (
-                                        <tr key={o._id}>
+                                        <tr key={b._id}>
                                             <td>{++count}</td>
-                                            <td>{o.time}</td>
-                                            <td>{o.date}</td>
-                                            <td>{o.from}</td>
-                                            <td>{o.to}</td>
-                                            <td>{o.pnumber}</td>
-                                            <td>{o.did}</td>
-                                            <td>{o.status}</td>
+                                            <td>{b.date}</td>
+                                            <td>{b.time}</td>
+                                            <td>{b.from}</td>
+                                            <td>{b.to}</td>
+                                            <td>{b.pnumber}</td>
+                                            <td>{b.status}</td>
                                         </tr>
                                     )
                                 })}
@@ -78,4 +77,4 @@ function Btable() {
     );
 }
 
-export default Btable;
+export default Mybtable;

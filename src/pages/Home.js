@@ -6,9 +6,6 @@ import Homefooter from "../components/Homefooter";
 import Homeride from "../components/Homeride";
 import Homevehicles from "../components/Homevehicles";
 
-
-
-
 function Home() {
     return (
         <>
@@ -21,7 +18,6 @@ function Home() {
                         <p style={{ fontSize: "larger", fontWeight: 900 }}>Ana Cabs Point</p>
                     </div>
                     <div>
-
                         <form className="d-flex">
                             <div>
                                 <Link className="btn btn-outline-success"
@@ -29,7 +25,7 @@ function Home() {
                                 <Link className="btn btn-outline-success"
                                     to={"/dlogin"}>Driver</Link>{" "}
                                 <Link className="btn btn-outline-success"
-                                    to={"/citytaxi"}>Book Now</Link>
+                                    to={"/login"}>Book Now</Link>
                             </div>
                         </form>
                     </div>

@@ -1,69 +1,66 @@
-import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import Homefooter from "../components/Homefooter";
 import Navbar from "../components/Navbar";
 
-function Alogin() {
+function Ulogin() {
     const Navigate = useNavigate()
     const initialform = {
         uname: "",
         password: ""
     }
-    const [Alog, setAlog] = useState(initialform)
-
-    function Alogchange({ target: { value, name } }) {
-        setAlog({ ...Alog, [name]: value })
+    const [Ulog, setUlog] = useState(initialform)
+    function Ulogchange({ target: { value, name } }) {
+        setUlog({ ...Ulog, [name]: value })
     }
-    async function ahome() {
+    async function book() {
         try {
-            const { data: { authToken } } = await axios.post("http://localhost:3001/api/auth/alogin", Alog)
-            window.localStorage.setItem("Aauth", authToken)
-            Navigate("/ahome", { replace: true })
+            const { data: { authToken } } = await axios.post("http://localhost:3001/api/auth/login", Ulog)
+            window.localStorage.setItem("Uauth", authToken)
+            Navigate("/citytaxi", { replace: true })
         } catch ({ response: { data } }) {
             alert(data.error)
         }
     }
-    function Alogsubmit(event) {
-        event.preventDefault();
-        ahome();
+    function Ulogsubmit(event) {
+        event.preventDefault()
+        book()
     }
     return (
         <>
             <Navbar />
-            <div className="container">
+            <div className="container" style={{ paddingBottom: 20 }}>
                 <div className="row">
-                    <div className="col-1"></div>
+                    <div className="col-7">
+                        <img src="./images/ulogin.gif" />
+                    </div>
                     <div className="col-5">
-                        <p>Use this UserName and Password</p>
-                        <p>User Name:sakthivel{" "}
-                            Password:sakthivelsa</p>
                         <div className="card">
                             <div className="card-body">
-                                <h4 className="card-title text-center">LOGIN </h4>
+                                <h4 className="card-title text-center">User LogIn </h4>
                                 <hr />
-                                <form onSubmit={Alogsubmit}>
+                                <form onSubmit={Ulogsubmit}>
                                     <div className="form-group">
                                         <label htmlFor="uname">User Name</label>
                                         <input id="uname" type="text" className="form-control" placeholder="Enter your user name" name="uname"
-                                            onChange={Alogchange} required="required" />
+                                            onChange={Ulogchange} required="required" />
                                     </div>
                                     <br />
                                     <div className="form-group">
                                         <label htmlFor="password">Password</label>
                                         <input id="password" type="password" className="form-control" placeholder="Enter your password" name="password"
-                                            onChange={Alogchange} required="required" />
+                                            onChange={Ulogchange} required="required" />
                                         <br />
                                     </div>
                                     <div className="form-group">
                                         <button type="submit" className="btn btn-outline-success">Login</button >
                                     </div>
+                                    <br />
+                                    <p>Don't have an account? <Link to={"/register"}>Register Here..</Link></p>
                                 </form>
                             </div>
                         </div>
-                    </div>
-                    <div className="col-6">
-                        <img height={350} width={550} src="./images/adminhome.jpg" />
                     </div>
                 </div>
             </div>
@@ -73,4 +70,4 @@ function Alogin() {
     );
 }
 
-export default Alogin;
+export default Ulogin;

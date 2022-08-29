@@ -7,26 +7,59 @@ import axios from "axios";
 function Cityvar() {
     const { Aform, Achange } = useContext(AformContext)
     const Navigate = useNavigate()
+    const Uauth = window.localStorage.getItem("Uauth")
 
     async function Asubmit(event) {
         try {
             event.preventDefault();
-            const { data } = await axios.post("https://anacabs.herokuapp.com/api/bookings", Aform)
+            const { data } = await axios.post("http://localhost:3001/api/bookings", Aform, {
+                headers: {
+                    "Authorization": `Bearer ${Uauth}`
+                }
+            })
             Sweet()
-        } catch ({ response: { data } }) {
-            alert(data.error)
+        } catch ({ response: { data, status } }) {
+            if (status == "403" || status == "401") {
+                window.localStorage.clear();
+                Navigate("/login", { replace: true })
+            }
+            else {
+                alert(data.error)
+            }
         }
     }
-
+    async function otp() {
+        try {
+            const { data } = await axios.post("http://localhost:3001/api/bookings/otp", { pnumber: Aform.pnumber }, {
+                headers: {
+                    "Authorization": `Bearer ${Uauth}`
+                }
+            })
+            console.log(data)
+            if (data) {
+                swal.fire({
+                    text: { data },
+                    icon: "success",
+                })
+            }
+        } catch ({ response: { data, status } }) {
+            if (status == "403" || status == "401") {
+                window.localStorage.clear();
+                Navigate("/login", { replace: true })
+            }
+            else {
+                alert(data.error)
+            }
+        }
+    }
     function Sweet() {
         swal.fire({
             text: `You order is confirmed!
             Our driver will call you`,
             icon: "success",
+        }).then(() => {
+            Navigate("/mybookings", { replace: true });
         })
-            .then(() => {
-                Navigate("/", { replace: true });
-            })
     }
     return (
         <>
@@ -52,7 +85,7 @@ function Cityvar() {
                             </div>
                             <br />
                             <div style={{ display: "flex" }}>
-                                <Link className="btn btn-outline-success" to="">Send OTP</Link>{" "}
+                                <button className="btn btn-outline-success" onClick={otp}>Send OTP</button>{" "}
                                 <input style={{ width: 300 }} id="OTP" type="tel" className="form-control" placeholder="Enter the OTP" required="required" />
                             </div>
                             <br />

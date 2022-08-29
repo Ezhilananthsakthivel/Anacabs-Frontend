@@ -5,6 +5,7 @@ import Dorders from "../pages/Dorders";
 import Dlogin from "../pages/Dlogin";
 import Dhistory from "../pages/Dhistory"
 import { Dprivateroute } from "./Privateroute";
+import Dprofile from "../pages/Dprofile";
 
 
 function Driverouter() {
@@ -14,6 +15,7 @@ function Driverouter() {
             <Route path={"/dhome"} element={<Dprivateroute><Dhome /></Dprivateroute>} />
             <Route path={"/dorders"} element={<Dprivateroute><Dorders /></Dprivateroute>} />
             <Route path={"/dhistory"} element={<Dprivateroute><Dhistory /></Dprivateroute>} />
+            <Route path={"/dprofile"} element={<Dprivateroute><Dprofile /></Dprivateroute>} />
         </Routes>
     );
 }

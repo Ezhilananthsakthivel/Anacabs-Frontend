@@ -2,20 +2,21 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 
-function Dhtable() {
+function Utable() {
     const Navigate = useNavigate()
     const [loading, setloading] = useState(true)
-    const [orders, setorders] = useState([])
+    const [users, setusers] = useState([])
     let count = 0
-    const Dauth = window.localStorage.getItem("Dauth")
-    async function didorders() {
+    const Aauth = window.localStorage.getItem("Aauth")
+
+    async function getusers() {
         try {
-            const { data } = await axios.get("http://localhost:3001/api/bookings/didorders", {
+            const { data } = await axios.get("http://localhost:3001/api/users", {
                 headers: {
-                    "Authorization": `Bearer ${Dauth}`
+                    "Authorization": `Bearer ${Aauth}`
                 }
             });
-            setorders(data);
+            setusers(data);
             setloading(false)
         } catch ({ response: { data, status } }) {
             if (status == "403" || status == "401") {
@@ -27,20 +28,20 @@ function Dhtable() {
             }
         }
     }
-    async function Ocomplete(Order) {
+    async function udelete(u) {
         try {
-            setloading(true)
-            const { data } = await axios.put(`http://localhost:3001/api/bookings/cupdate/${Order._id}`, Order, {
-                headers: {
-                    "Authorization": `Bearer ${Dauth}`
-                }
-            });
-            didorders()
-            setloading(false)
+            if (window.confirm(`Delete ${u.uname}`)) {
+                const { data } = await axios.delete(`http://localhost:3001/api/users/${u._id}`, {
+                    headers: {
+                        "Authorization": `Bearer ${Aauth}`
+                    }
+                });
+                getusers()
+            }
         } catch ({ response: { data, status } }) {
             if (status == "403" || status == "401") {
                 window.localStorage.clear();
-                Navigate("/dlogin", { replace: true })
+                Navigate("/alogin", { replace: true })
             }
             else {
                 alert(data.error)
@@ -48,7 +49,7 @@ function Dhtable() {
         }
     }
     useEffect(() => {
-        didorders();
+        getusers();
     }, []);
     return (
         <>
@@ -59,30 +60,21 @@ function Dhtable() {
                             <thead>
                                 <tr>
                                     <th>S.no</th>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                    <th>From</th>
-                                    <th>To</th>
+                                    <th>Name</th>
+                                    <th>User Name</th>
                                     <th>Phone Number</th>
-                                    <th>Status</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {orders.map((o) => {
+                                {users.map((u) => {
                                     return (
-                                        <tr key={o._id}>
+                                        <tr key={u._id} onClick={() => Navigate("/users/orders", { state: { uname: u.uname } })}>
                                             <td>{++count}</td>
-                                            <td>{o.date}</td>
-                                            <td>{o.time}</td>
-                                            <td>{o.from}</td>
-                                            <td>{o.to}</td>
-                                            <td>{o.pnumber}</td>
-                                            {o.status === "Accepted" ?
-                                                <td><button onClick={() => {
-                                                    Ocomplete(o)
-                                                }} className="btn btn-outline-primary">Complete</button></td>
-                                                : <td>{o.status}</td>
-                                            }
+                                            <td>{u.fname}</td>
+                                            <td>{u.uname}</td>
+                                            <td>{u.pnumber}</td>
+                                            <td><button className="btn btn-outline-secondary" onClick={() => udelete(u)}>Delete</button></td>
                                         </tr>
                                     )
                                 })}
@@ -101,4 +93,4 @@ function Dhtable() {
     );
 }
 
-export default Dhtable;
+export default Utable
