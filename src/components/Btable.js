@@ -8,15 +8,16 @@ function Btable() {
     const [orders, setorders] = useState([])
     let count = 0
     const Aauth = window.localStorage.getItem("Aauth")
+    
     async function getorders() {
         try {
-            const { data } = await axios.get("http://localhost:3001/api/bookings", {
+            const { data } = await axios.get("https://anacabs.herokuapp.com/api/bookings", {
                 headers: {
                     "Authorization": `Bearer ${Aauth}`
                 }
             });
-            setorders(data);
             setloading(false)
+            setorders(data);
         } catch ({ response: { data, status } }) {
             if (status == "403" || status == "401") {
                 window.localStorage.clear();
@@ -27,9 +28,11 @@ function Btable() {
             }
         }
     }
+
     useEffect(() => {
         getorders();
     }, []);
+
     return (
         <>
             <div className="container-fulid">

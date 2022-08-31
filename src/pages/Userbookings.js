@@ -5,17 +5,19 @@ import axios from "axios"
 function Userbookings() {
     const Navigate = useNavigate()
     const { state } = useLocation()
+    const [loading, setloading] = useState(true)
     const [orders, setorders] = useState([])
     let count = 0
     const Aauth = window.localStorage.getItem("Aauth")
 
     async function getorders() {
         try {
-            const { data } = await axios.post("http://localhost:3001/api/bookings/userorders", { uname: state.uname }, {
+            const { data } = await axios.post("https://anacabs.herokuapp.com/api/bookings/userorders", { uname: state.uname }, {
                 headers: {
                     "Authorization": `Bearer ${Aauth}`
                 }
             });
+            setloading(false)
             setorders(data);
         } catch ({ response: { data, status } }) {
             if (status == "403" || status == "401") {
@@ -27,9 +29,11 @@ function Userbookings() {
             }
         }
     }
+
     useEffect(() => {
         getorders();
     }, []);
+
     return (
         <>
             <div className="container-fulid">
@@ -63,6 +67,11 @@ function Userbookings() {
                                 })}
                             </tbody>
                         </table>
+                        {loading &&
+                            <div className="d-flex justify-content-center">
+                                <img src="./images/loading.gif" />
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

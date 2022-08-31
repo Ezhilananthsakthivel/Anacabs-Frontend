@@ -15,9 +15,10 @@ function Alogin() {
     function Alogchange({ target: { value, name } }) {
         setAlog({ ...Alog, [name]: value })
     }
+
     async function ahome() {
         try {
-            const { data: { authToken } } = await axios.post("http://localhost:3001/api/auth/alogin", Alog)
+            const { data: { authToken } } = await axios.post("https://anacabs.herokuapp.com/api/auth/alogin", Alog)
             window.localStorage.setItem("Aauth", authToken)
             Navigate("/ahome", { replace: true })
         } catch ({ response: { data } }) {
@@ -28,6 +29,7 @@ function Alogin() {
         event.preventDefault();
         ahome();
     }
+
     return (
         <>
             <Navbar />

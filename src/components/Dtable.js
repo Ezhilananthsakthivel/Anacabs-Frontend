@@ -11,13 +11,13 @@ function Dtable() {
 
     async function getdrivers() {
         try {
-            const { data } = await axios.get("http://localhost:3001/api/drivers", {
+            const { data } = await axios.get("https://anacabs.herokuapp.com/api/drivers", {
                 headers: {
                     "Authorization": `Bearer ${Aauth}`
                 }
             });
-            setdrivers(data);
             setloading(false)
+            setdrivers(data);
         } catch ({ response: { data, status } }) {
             if (status == "403" || status == "401") {
                 window.localStorage.clear();
@@ -28,10 +28,11 @@ function Dtable() {
             }
         }
     }
+
     async function Ddelete(d) {
         try {
             if (window.confirm(`Delete ${d.uname}`)) {
-                const { data } = await axios.delete(`http://localhost:3001/api/drivers/${d._id}`, {
+                const { data } = await axios.delete(`https://anacabs.herokuapp.com/api/drivers/${d._id}`, {
                     headers: {
                         "Authorization": `Bearer ${Aauth}`
                     }
@@ -48,9 +49,10 @@ function Dtable() {
             }
         }
     }
+
     // async function Dedit(d) {
     //     try {
-    //         const { data } = await axios.put(`http://localhost:3001/api/drivers/${d._id}`, {
+    //         const { data } = await axios.put(`https://anacabs.herokuapp.com/api/drivers/${d._id}`, {
     //             headers: {
     //                 "Authorization": `Bearer ${Aauth}`
     //             }
@@ -65,9 +67,11 @@ function Dtable() {
     //         }
     //     }
     // }
+
     useEffect(() => {
         getdrivers();
     }, []);
+    
     return (
         <>
             <div className="container-fulid">

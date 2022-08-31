@@ -11,7 +11,7 @@ function Driverorders() {
 
     async function getorders() {
         try {
-            const { data } = await axios.post("http://localhost:3001/api/bookings/driverorders", { uname: state.uname }, {
+            const { data } = await axios.post("https://anacabs.herokuapp.com/api/bookings/driverorders", { uname: state.uname }, {
                 headers: {
                     "Authorization": `Bearer ${Aauth}`
                 }

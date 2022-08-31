@@ -11,7 +11,7 @@ function Mybtable() {
 
     async function Ubookings() {
         try {
-            const { data } = await axios.get("http://localhost:3001/api/bookings/ubookings", {
+            const { data } = await axios.get("https://anacabs.herokuapp.com/api/bookings/ubookings", {
                 headers: {
                     "Authorization": `Bearer ${Uauth}`
                 }
@@ -28,9 +28,11 @@ function Mybtable() {
             }
         }
     }
+
     useEffect(() => {
         Ubookings();
     }, []);
+    
     return (
         <>
             <div className="container-fulid">

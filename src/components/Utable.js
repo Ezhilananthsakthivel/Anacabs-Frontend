@@ -11,13 +11,13 @@ function Utable() {
 
     async function getusers() {
         try {
-            const { data } = await axios.get("http://localhost:3001/api/users", {
+            const { data } = await axios.get("https://anacabs.herokuapp.com/api/users", {
                 headers: {
                     "Authorization": `Bearer ${Aauth}`
                 }
             });
-            setusers(data);
             setloading(false)
+            setusers(data);
         } catch ({ response: { data, status } }) {
             if (status == "403" || status == "401") {
                 window.localStorage.clear();
@@ -28,10 +28,11 @@ function Utable() {
             }
         }
     }
+
     async function udelete(u) {
         try {
             if (window.confirm(`Delete ${u.uname}`)) {
-                const { data } = await axios.delete(`http://localhost:3001/api/users/${u._id}`, {
+                const { data } = await axios.delete(`https://anacabs.herokuapp.com/api/users/${u._id}`, {
                     headers: {
                         "Authorization": `Bearer ${Aauth}`
                     }
@@ -48,9 +49,11 @@ function Utable() {
             }
         }
     }
+
     useEffect(() => {
         getusers();
     }, []);
+
     return (
         <>
             <div className="container-fulid">

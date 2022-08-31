@@ -12,24 +12,29 @@ const formInitial = {
     cpassword: "",
     pnumber: ""
 }
+
 function Uregister() {
     const Navigate = useNavigate()
     const [Reg, setReg] = useState(formInitial)
+
     function Uchange({ target: { value, name } }) {
         setReg({ ...Reg, [name]: value })
     }
+
     const creatuser = async () => {
         try {
-            const { data } = await axios.post("http://localhost:3001/api/auth/register", Reg)
+            const { data } = await axios.post("https://anacabs.herokuapp.com/api/auth/register", Reg)
             Sweet()
         } catch ({ response: { data } }) {
             alert(data.error)
         }
     }
+
     function Usubmit(event) {
         event.preventDefault();
         creatuser()
     }
+
     function Sweet() {
         swal.fire({
             text: `Start Booking Your Rides`,
@@ -38,6 +43,7 @@ function Uregister() {
             Navigate("/login", { replace: true });
         })
     }
+
     return (
         <>
             <Navbar />

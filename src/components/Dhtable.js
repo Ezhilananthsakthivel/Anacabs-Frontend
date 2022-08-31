@@ -8,15 +8,16 @@ function Dhtable() {
     const [orders, setorders] = useState([])
     let count = 0
     const Dauth = window.localStorage.getItem("Dauth")
+
     async function didorders() {
         try {
-            const { data } = await axios.get("http://localhost:3001/api/bookings/didorders", {
+            const { data } = await axios.get("https://anacabs.herokuapp.com/api/bookings/didorders", {
                 headers: {
                     "Authorization": `Bearer ${Dauth}`
                 }
             });
-            setorders(data);
             setloading(false)
+            setorders(data);
         } catch ({ response: { data, status } }) {
             if (status == "403" || status == "401") {
                 window.localStorage.clear();
@@ -27,16 +28,17 @@ function Dhtable() {
             }
         }
     }
+
     async function Ocomplete(Order) {
         try {
             setloading(true)
-            const { data } = await axios.put(`http://localhost:3001/api/bookings/cupdate/${Order._id}`, Order, {
+            const { data } = await axios.put(`https://anacabs.herokuapp.com/api/bookings/cupdate/${Order._id}`, Order, {
                 headers: {
                     "Authorization": `Bearer ${Dauth}`
                 }
             });
-            didorders()
             setloading(false)
+            didorders()
         } catch ({ response: { data, status } }) {
             if (status == "403" || status == "401") {
                 window.localStorage.clear();
@@ -47,9 +49,11 @@ function Dhtable() {
             }
         }
     }
+
     useEffect(() => {
         didorders();
     }, []);
+    
     return (
         <>
             <div className="container-fulid">

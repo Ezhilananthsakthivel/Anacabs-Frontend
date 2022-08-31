@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import swal from 'sweetalert2';
 import { AformContext } from "./Ucontext"
 import axios from "axios";
@@ -12,7 +12,7 @@ function Cityvar() {
     async function Asubmit(event) {
         try {
             event.preventDefault();
-            const { data } = await axios.post("http://localhost:3001/api/bookings", Aform, {
+            const { data } = await axios.post("https://anacabs.herokuapp.com/api/bookings", Aform, {
                 headers: {
                     "Authorization": `Bearer ${Uauth}`
                 }
@@ -21,16 +21,17 @@ function Cityvar() {
         } catch ({ response: { data, status } }) {
             if (status == "403" || status == "401") {
                 window.localStorage.clear();
-                Navigate("/login", { replace: true })
+                Navigate("/", { replace: true })
             }
             else {
                 alert(data.error)
             }
         }
     }
+
     async function otp() {
         try {
-            const { data } = await axios.post("http://localhost:3001/api/bookings/otp", { pnumber: Aform.pnumber }, {
+            const { data } = await axios.post("https://anacabs.herokuapp.com/api/bookings/otp", { pnumber: Aform.pnumber }, {
                 headers: {
                     "Authorization": `Bearer ${Uauth}`
                 }
@@ -45,13 +46,14 @@ function Cityvar() {
         } catch ({ response: { data, status } }) {
             if (status == "403" || status == "401") {
                 window.localStorage.clear();
-                Navigate("/login", { replace: true })
+                Navigate("/", { replace: true })
             }
             else {
                 alert(data.error)
             }
         }
     }
+
     function Sweet() {
         swal.fire({
             text: `You order is confirmed!
@@ -86,7 +88,8 @@ function Cityvar() {
                             <br />
                             <div style={{ display: "flex" }}>
                                 <button className="btn btn-outline-success" onClick={otp}>Send OTP</button>{" "}
-                                <input style={{ width: 300 }} id="OTP" type="tel" className="form-control" placeholder="Enter the OTP" required="required" />
+                                <input style={{ width: 300 }} id="OTP" type="number" name="otp" className="form-control" placeholder="Enter the OTP"
+                                    onChange={Achange} />
                             </div>
                             <br />
                             <button type="submit" className="btn btn-outline-success" >Confirm Your Cab</button>

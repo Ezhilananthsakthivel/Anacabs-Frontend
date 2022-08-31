@@ -8,15 +8,16 @@ function Dotable() {
     let count = 0
     const Navigate = useNavigate();
     const Dauth = window.localStorage.getItem("Dauth")
+
     async function getDorders() {
         try {
-            const { data } = await axios.get("http://localhost:3001/api/bookings/porders", {
+            const { data } = await axios.get("https://anacabs.herokuapp.com/api/bookings/porders", {
                 headers: {
                     "Authorization": `Bearer ${Dauth}`
                 }
             });
-            setorders(data);
             setloading(false)
+            setorders(data);
         } catch ({ response: { data, status } }) {
             if (status == "403" || status == "401") {
                 window.localStorage.clear();
@@ -27,9 +28,10 @@ function Dotable() {
             }
         }
     }
+
     async function Ordershistory(Order) {
         try {
-            const { data } = await axios.put(`http://localhost:3001/api/bookings/didput/${Order._id}`, Order, {
+            const { data } = await axios.put(`https://anacabs.herokuapp.com/api/bookings/didput/${Order._id}`, Order, {
                 headers: {
                     "Authorization": `Bearer ${Dauth}`
                 }
@@ -46,9 +48,11 @@ function Dotable() {
             }
         }
     }
+
     useEffect(() => {
         getDorders();
     }, []);
+    
     return (
         <>
             <div className="container">

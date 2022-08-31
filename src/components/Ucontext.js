@@ -9,9 +9,9 @@ function AformProvider(props) {
         time: "",
         date: "",
         pnumber: "",
-        did: "",
+        otp: ""
     })
-    function Achange ({ target: { value, name } }) {
+    function Achange({ target: { value, name } }) {
         setAform({ ...Aform, [name]: value })
     }
     return (

@@ -23,7 +23,7 @@ function Unav() {
                                 <button className="btn btn-outline-danger"
                                     onClick={() => {
                                         window.localStorage.clear();
-                                        Navigate("/login", { replace: true })
+                                        Navigate("/", { replace: true })
                                     }}>Logout</button>
                             </div>
                         </form>
