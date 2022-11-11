@@ -2,7 +2,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Anacabs Backend repositor Link: https://github.com/Ezhilananthsakthivel/Anacabs-Backend
+Anacabs Backend Git Repositor URL: https://github.com/Ezhilananthsakthivel/Anacabs-Backend
+Anacabs Deploy URL: https://anacabs.netlify.app/
 
 ## Available Scripts
 
