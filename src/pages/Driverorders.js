@@ -11,7 +11,7 @@ function Driverorders() {
 
     async function getorders() {
         try {
-            const { data } = await axios.post("http://anacabs-backend.vercel.app/api/bookings/driverorders", { uname: state.uname }, {
+            const { data } = await axios.post("https://anacabs-backend.vercel.app/api/bookings/driverorders", { uname: state.uname }, {
                 headers: {
                     "Authorization": `Bearer ${Aauth}`
                 }

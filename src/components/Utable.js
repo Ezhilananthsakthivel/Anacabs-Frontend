@@ -11,7 +11,7 @@ function Utable() {
 
     async function getusers() {
         try {
-            const { data } = await axios.get("http://anacabs-backend.vercel.app/api/users", {
+            const { data } = await axios.get("https://anacabs-backend.vercel.app/api/users", {
                 headers: {
                     "Authorization": `Bearer ${Aauth}`
                 }
@@ -32,7 +32,7 @@ function Utable() {
     async function udelete(u) {
         try {
             if (window.confirm(`Delete ${u.uname}`)) {
-                const { data } = await axios.delete(`http://anacabs-backend.vercel.app/api/users/${u._id}`, {
+                const { data } = await axios.delete(`https://anacabs-backend.vercel.app/api/users/${u._id}`, {
                     headers: {
                         "Authorization": `Bearer ${Aauth}`
                     }
