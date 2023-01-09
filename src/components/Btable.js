@@ -10,7 +10,7 @@ function Btable() {
     const Aauth = window.localStorage.getItem("Aauth")
     async function getorders() {
         try {
-            const { data } = await axios.get("https://anacabs.herokuapp.com/api/bookings", {
+            const { data } = await axios.get("http://anacabs-backend.vercel.app/api/bookings", {
                 headers: {
                     "Authorization": `Bearer ${Aauth}`
                 }

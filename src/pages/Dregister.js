@@ -24,7 +24,7 @@ function Dregister() {
     const Aauth = window.localStorage.getItem("Aauth")
     const createuser = async () => {
         try {
-            const { data } = await axios.post("https://anacabs.herokuapp.com/api/auth/dregister", Reg, {
+            const { data } = await axios.post("http://anacabs-backend.vercel.app/api/auth/dregister", Reg, {
                 headers: {
                     "Authorization": `Bearer ${Aauth}`
                 }

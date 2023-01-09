@@ -17,7 +17,7 @@ function Dlogin() {
     }
     async function dhome() {
         try {
-            const { data: { authToken } } = await axios.post("https://anacabs.herokuapp.com/api/auth/dlogin", Dlog)
+            const { data: { authToken } } = await axios.post("http://anacabs-backend.vercel.app/api/auth/dlogin", Dlog)
             window.localStorage.setItem("Dauth", authToken)
             Navigate("/dhome", { replace: true })
         } catch ({ response: { data } }) {

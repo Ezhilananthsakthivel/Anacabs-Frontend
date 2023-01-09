@@ -10,7 +10,7 @@ function Dhtable() {
     const Dauth = window.localStorage.getItem("Dauth")
     async function didorders() {
         try {
-            const { data } = await axios.get("https://anacabs.herokuapp.com/api/bookings/didorders", {
+            const { data } = await axios.get("http://anacabs-backend.vercel.app/api/bookings/didorders", {
                 headers: {
                     "Authorization": `Bearer ${Dauth}`
                 }
@@ -29,7 +29,7 @@ function Dhtable() {
     }
     async function Ocomplete(Order) {
         try {
-            const { data } = await axios.put(`https://anacabs.herokuapp.com/api/bookings/cupdate/${Order._id}`, Order, {
+            const { data } = await axios.put(`http://anacabs-backend.vercel.app/api/bookings/cupdate/${Order._id}`, Order, {
                 headers: {
                     "Authorization": `Bearer ${Dauth}`
                 }

@@ -11,7 +11,7 @@ function Cityvar() {
     async function Asubmit(event) {
         try {
             event.preventDefault();
-            const { data } = await axios.post("https://anacabs.herokuapp.com/api/bookings", Aform)
+            const { data } = await axios.post("http://anacabs-backend.vercel.app/api/bookings", Aform)
             Sweet()
         } catch ({ response: { data } }) {
             alert(data.error)

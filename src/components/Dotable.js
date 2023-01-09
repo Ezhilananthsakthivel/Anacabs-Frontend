@@ -10,7 +10,7 @@ function Dotable() {
     const Dauth = window.localStorage.getItem("Dauth")
     async function getDorders() {
         try {
-            const { data } = await axios.get("https://anacabs.herokuapp.com/api/bookings/porders", {
+            const { data } = await axios.get("http://anacabs-backend.vercel.app/api/bookings/porders", {
                 headers: {
                     "Authorization": `Bearer ${Dauth}`
                 }
@@ -29,7 +29,7 @@ function Dotable() {
     }
     async function Ordershistory(Order) {
         try {
-            const { data } = await axios.put(`https://anacabs.herokuapp.com/api/bookings/didput/${Order._id}`, Order, {
+            const { data } = await axios.put(`http://anacabs-backend.vercel.app/api/bookings/didput/${Order._id}`, Order, {
                 headers: {
                     "Authorization": `Bearer ${Dauth}`
                 }
