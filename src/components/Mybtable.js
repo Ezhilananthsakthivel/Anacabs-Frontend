@@ -11,7 +11,7 @@ function Mybtable() {
 
     async function Ubookings() {
         try {
-            const { data } = await axios.get("https://anacabs.herokuapp.com/api/bookings/ubookings", {
+            const { data } = await axios.get("http://anacabs-backend.vercel.app/api/bookings/ubookings", {
                 headers: {
                     "Authorization": `Bearer ${Uauth}`
                 }

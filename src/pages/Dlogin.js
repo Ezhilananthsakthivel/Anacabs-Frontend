@@ -10,20 +10,23 @@ function Dlogin() {
         uname: "",
         password: ""
     }
+
     const [Dlog, setDlog] = useState(initialform)
 
     function Dlogchange({ target: { value, name } }) {
         setDlog({ ...Dlog, [name]: value })
     }
+
     async function dhome() {
         try {
-            const { data: { authToken } } = await axios.post("https://anacabs.herokuapp.com/api/auth/dlogin", Dlog)
+            const { data: { authToken } } = await axios.post("http://anacabs-backend.vercel.app/api/auth/dlogin", Dlog)
             window.localStorage.setItem("Dauth", authToken)
             Navigate("/dhome", { replace: true })
         } catch ({ response: { data } }) {
             alert(data.error)
         }
     }
+
     function Dlogsubmit(event) {
         event.preventDefault();
         dhome();

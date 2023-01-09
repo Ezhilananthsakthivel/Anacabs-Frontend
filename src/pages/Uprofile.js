@@ -12,7 +12,7 @@ function Uprofile() {
 
     async function profile() {
         try {
-            const { data } = await axios.get("https://anacabs.herokuapp.com/api/users/myprofile", {
+            const { data } = await axios.get("http://anacabs-backend.vercel.app/api/users/myprofile", {
                 headers: {
                     "Authorization": `Bearer ${Uauth}`
                 }
@@ -73,9 +73,9 @@ function Uprofile() {
                             }
                         </form>
                     </div>
-                    <div className="col-1">
+                    {/* <div className="col-1">
                         <button className="btn btn-outline-success" onClick={() => setRead(false)}>Edit</button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <br /><br />
