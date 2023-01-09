@@ -46,10 +46,10 @@ function Home() {
                     <div>
                         <form className="d-flex">
                             <div>
-                                {/* <button className="btn btn-outline-success"
+                                {<button className="btn btn-outline-success"
                                     onClick={admin} >Admin</button>{" "}
                                 <button className="btn btn-outline-success"
-                                    onClick={driver}>Driver</button>{" "} */}
+                                    onClick={driver}>Driver</button>{" "}}
                                 <button className="btn btn-outline-success"
                                     onClick={user}>Book Now</button>
                             </div>
