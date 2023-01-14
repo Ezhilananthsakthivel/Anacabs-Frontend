@@ -5,7 +5,7 @@ function Homeride(){
         <>
         <div className="container" >
         <div className="row">
-            <div className="col-4">
+            <div className="col-4 col-md-12 col-sm-12">
                 <div className="card hcardhover h-100" style={{width: "18rem"}}>
                     <img height="215" src="./images/citytaxi2.jpg" className="card-img-top" />
                     <div className="card-body">
@@ -19,7 +19,7 @@ function Homeride(){
                     </div>
                 </div>
             </div>
-            <div className="col-4 ">
+            <div className="col-4 col-md-12 col-sm-12">
                 <div className="card hcardhover h-100" style={{width: "18rem"}}>
                     <img height="215" src="./images/outst.jpg" className="card-img-top" />
                     <div className="card-body">
@@ -33,7 +33,7 @@ function Homeride(){
                     </div>
                 </div>
             </div>
-            <div className="col-4">
+            <div className="col-4 col-md-12 col-sm-12">
                 <div className="card hcardhover h-100" style={{width: "18rem"}}>
                     <img height="215" src="./images/rent.jpg" className="card-img-top" />
                     <div className="card-body">

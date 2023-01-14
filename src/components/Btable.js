@@ -11,7 +11,7 @@ function Btable() {
     
     async function getorders() {
         try {
-            const { data } = await axios.get("https://anacabs-backend.vercel.app/api/bookings", {
+            const { data } = await axios.get("http://localhost:3001/api/bookings", {
                 headers: {
                     "Authorization": `Bearer ${Aauth}`
                 }

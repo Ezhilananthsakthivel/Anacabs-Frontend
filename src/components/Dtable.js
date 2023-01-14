@@ -11,7 +11,7 @@ function Dtable() {
 
     async function getdrivers() {
         try {
-            const { data } = await axios.get("https://anacabs-backend.vercel.app/api/drivers", {
+            const { data } = await axios.get("http://localhost:3001/api/drivers", {
                 headers: {
                     "Authorization": `Bearer ${Aauth}`
                 }
@@ -32,7 +32,7 @@ function Dtable() {
     async function Ddelete(d) {
         try {
             if (window.confirm(`Delete ${d.uname}`)) {
-                const { data } = await axios.delete(`https://anacabs-backend.vercel.app/api/drivers/${d._id}`, {
+                const { data } = await axios.delete(`http://localhost:3001/api/drivers/${d._id}`, {
                     headers: {
                         "Authorization": `Bearer ${Aauth}`
                     }
@@ -52,7 +52,7 @@ function Dtable() {
 
     // async function Dedit(d) {
     //     try {
-    //         const { data } = await axios.put(`https://anacabs-backend.vercel.app/api/drivers/${d._id}`, {
+    //         const { data } = await axios.put(`http://localhost:3001/api/drivers/${d._id}`, {
     //             headers: {
     //                 "Authorization": `Bearer ${Aauth}`
     //             }

@@ -7,7 +7,7 @@ import Navbar from "../components/Navbar";
 function Ulogin() {
     const Navigate = useNavigate()
     const initialform = {
-        uname: "",
+        email: "",
         password: ""
     }
 
@@ -18,7 +18,7 @@ function Ulogin() {
 
     async function book() {
         try {
-            const { data: { authToken } } = await axios.post("https://anacabs-backend.vercel.app/api/auth/login", Ulog)
+            const { data: { authToken } } = await axios.post("http://localhost:3001/api/auth/login", Ulog)
             window.localStorage.setItem("Uauth", authToken)
             Navigate("/citytaxi", { replace: true })
         } catch ({ response: { data } }) {
@@ -46,8 +46,8 @@ function Ulogin() {
                                 <hr />
                                 <form onSubmit={Ulogsubmit}>
                                     <div className="form-group">
-                                        <label htmlFor="uname">User Name</label>
-                                        <input id="uname" type="text" className="form-control" placeholder="Enter your user name" name="uname"
+                                        <label htmlFor="uname">Email</label>
+                                        <input id="uname" type="email" className="form-control" placeholder="Enter your email" name="email"
                                             onChange={Ulogchange} required="required" />
                                     </div>
                                     <br />
