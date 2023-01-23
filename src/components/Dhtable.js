@@ -35,8 +35,7 @@ function Dhtable() {
             const { data } = await axios.put(`https://anacabs-backend.vercel.app/api/bookings/cupdate/${Order._id}`, Order, {
 =======
             setloading(true)
-            const { data } = await axios.put(`https://anacabs-backend.vercel.app/api/bookings/cupdate/${Order._id}`, Order, {
->>>>>>> 6cacd21ebda298ff15c07979879184385a795d97
+            const { data } = await axios.put(`https://anacabs.herokuapp.com/api/bookings/cupdate/${Order._id}`, Order, {
                 headers: {
                     "Authorization": `Bearer ${Dauth}`
                 }

@@ -84,9 +84,9 @@ function Dprofile() {
                             }
                         </form>
                     </div>
-                    <div className="col-1">
+                    {/* <div className="col-1">
                         <button className="btn btn-outline-success" onClick={() => setRead(false)}>Edit</button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <br /><br />

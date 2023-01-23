@@ -7,7 +7,7 @@ import Navbar from "../components/Navbar";
 function Ulogin() {
     const Navigate = useNavigate()
     const initialform = {
-        uname: "",
+        email: "",
         password: ""
     }
 
@@ -46,8 +46,8 @@ function Ulogin() {
                                 <hr />
                                 <form onSubmit={Ulogsubmit}>
                                     <div className="form-group">
-                                        <label htmlFor="uname">User Name</label>
-                                        <input id="uname" type="text" className="form-control" placeholder="Enter your user name" name="uname"
+                                        <label htmlFor="uname">Email</label>
+                                        <input id="uname" type="email" className="form-control" placeholder="Enter your email" name="email"
                                             onChange={Ulogchange} required="required" />
                                     </div>
                                     <br />

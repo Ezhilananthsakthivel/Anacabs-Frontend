@@ -10,11 +10,13 @@ function Dlogin() {
         uname: "",
         password: ""
     }
+
     const [Dlog, setDlog] = useState(initialform)
 
     function Dlogchange({ target: { value, name } }) {
         setDlog({ ...Dlog, [name]: value })
     }
+
     async function dhome() {
         try {
             const { data: { authToken } } = await axios.post("https://anacabs-backend.vercel.app/api/auth/dlogin", Dlog)
@@ -24,6 +26,7 @@ function Dlogin() {
             alert(data.error)
         }
     }
+
     function Dlogsubmit(event) {
         event.preventDefault();
         dhome();

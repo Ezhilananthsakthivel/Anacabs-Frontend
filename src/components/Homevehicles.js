@@ -4,8 +4,8 @@ function Homevehicles() {
     return (
         <div className="container">
             <div className="row">
-                <div className="col-3"></div>
-                <div className="col-8">
+                <div className="col-3 col-md-0"></div>
+                <div className="col-md-8">
                     <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel">
                         <div className="carousel-inner">
                             <div className="carousel-item active">

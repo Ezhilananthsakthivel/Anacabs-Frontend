@@ -35,7 +35,7 @@ function Cityvar() {
 
     async function otp() {
         try {
-            const { data } = await axios.post("https://anacabs-backend.vercel.app/api/bookings/otp", { pnumber: Aform.pnumber }, {
+            const { data } = await axios.post("https://anacabs.herokuapp.com/api/bookings/otp", { pnumber: Aform.pnumber }, {
                 headers: {
                     "Authorization": `Bearer ${Uauth}`
                 }
