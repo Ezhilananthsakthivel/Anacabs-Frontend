@@ -18,7 +18,7 @@ function Alogin() {
 
     async function ahome() {
         try {
-            const { data: { authToken } } = await axios.post("http://anacabs-backend.vercel.app/api/auth/alogin", Alog)
+            const { data: { authToken } } = await axios.post("https://anacabs-backend.vercel.app/api/auth/alogin", Alog)
             window.localStorage.setItem("Aauth", authToken)
             Navigate("/ahome", { replace: true })
         } catch ({ response: { data } }) {

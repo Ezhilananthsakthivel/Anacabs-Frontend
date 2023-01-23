@@ -23,7 +23,7 @@ function Uregister() {
 
     const creatuser = async () => {
         try {
-            const { data } = await axios.post("https://anacabs.herokuapp.com/api/auth/register", Reg)
+            const { data } = await axios.post("https://anacabs-backend.vercel.app/api/auth/register", Reg)
             Sweet()
         } catch ({ response: { data } }) {
             alert(data.error)
