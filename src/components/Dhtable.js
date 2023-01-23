@@ -8,15 +8,16 @@ function Dhtable() {
     const [orders, setorders] = useState([])
     let count = 0
     const Dauth = window.localStorage.getItem("Dauth")
+
     async function didorders() {
         try {
-            const { data } = await axios.get("http://anacabs-backend.vercel.app/api/bookings/didorders", {
+            const { data } = await axios.get("https://anacabs-backend.vercel.app/api/bookings/didorders", {
                 headers: {
                     "Authorization": `Bearer ${Dauth}`
                 }
             });
-            setorders(data);
             setloading(false)
+            setorders(data);
         } catch ({ response: { data, status } }) {
             if (status == "403" || status == "401") {
                 window.localStorage.clear();
@@ -27,13 +28,20 @@ function Dhtable() {
             }
         }
     }
+
     async function Ocomplete(Order) {
         try {
-            const { data } = await axios.put(`http://anacabs-backend.vercel.app/api/bookings/cupdate/${Order._id}`, Order, {
+<<<<<<< HEAD
+            const { data } = await axios.put(`https://anacabs-backend.vercel.app/api/bookings/cupdate/${Order._id}`, Order, {
+=======
+            setloading(true)
+            const { data } = await axios.put(`https://anacabs-backend.vercel.app/api/bookings/cupdate/${Order._id}`, Order, {
+>>>>>>> 6cacd21ebda298ff15c07979879184385a795d97
                 headers: {
                     "Authorization": `Bearer ${Dauth}`
                 }
             });
+            setloading(false)
             didorders()
         } catch ({ response: { data, status } }) {
             if (status == "403" || status == "401") {
@@ -45,9 +53,11 @@ function Dhtable() {
             }
         }
     }
+
     useEffect(() => {
         didorders();
     }, []);
+    
     return (
         <>
             <div className="container-fulid">
@@ -75,7 +85,7 @@ function Dhtable() {
                                             <td>{o.from}</td>
                                             <td>{o.to}</td>
                                             <td>{o.pnumber}</td>
-                                            {o.status === "pending" ?
+                                            {o.status === "Accepted" ?
                                                 <td><button onClick={() => {
                                                     Ocomplete(o)
                                                 }} className="btn btn-outline-primary">Complete</button></td>

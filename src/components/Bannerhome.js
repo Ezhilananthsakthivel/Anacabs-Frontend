@@ -1,6 +1,5 @@
 import React from "react";
 
-
 function Bannerhome(){
     return(
         <div className="container-fluid" style={{padding: "10px"}}>

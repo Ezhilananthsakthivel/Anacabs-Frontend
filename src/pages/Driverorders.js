@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import axios from "axios"
 
-function Btable() {
-    const Navigate = useNavigate();
-    const [loading, setloading] = useState(true)
+function Driverorders() {
+    const Navigate = useNavigate()
+    const { state } = useLocation()
     const [orders, setorders] = useState([])
     let count = 0
     const Aauth = window.localStorage.getItem("Aauth")
-    
+
     async function getorders() {
         try {
-            const { data } = await axios.get("http://anacabs-backend.vercel.app/api/bookings", {
+            const { data } = await axios.post("https://anacabs.herokuapp.com/api/bookings/driverorders", { uname: state.uname }, {
                 headers: {
                     "Authorization": `Bearer ${Aauth}`
                 }
             });
-            setloading(false)
             setorders(data);
         } catch ({ response: { data, status } }) {
             if (status == "403" || status == "401") {
@@ -28,11 +27,9 @@ function Btable() {
             }
         }
     }
-
     useEffect(() => {
         getorders();
     }, []);
-
     return (
         <>
             <div className="container-fulid">
@@ -47,8 +44,7 @@ function Btable() {
                                     <th>From</th>
                                     <th>To</th>
                                     <th>Phone Number</th>
-                                    <th>Driver</th>
-                                    <th>Ststus</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -61,18 +57,12 @@ function Btable() {
                                             <td>{o.from}</td>
                                             <td>{o.to}</td>
                                             <td>{o.pnumber}</td>
-                                            <td>{o.did}</td>
                                             <td>{o.status}</td>
                                         </tr>
                                     )
                                 })}
                             </tbody>
                         </table>
-                        {loading &&
-                            <div className="d-flex justify-content-center">
-                                <img src="./images/loading.gif" />
-                            </div>
-                        }
                     </div>
                 </div>
             </div>
@@ -81,4 +71,4 @@ function Btable() {
     );
 }
 
-export default Btable;
+export default Driverorders;

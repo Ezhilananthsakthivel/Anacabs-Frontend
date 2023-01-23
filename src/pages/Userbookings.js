@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import axios from "axios"
 
-function Btable() {
-    const Navigate = useNavigate();
+function Userbookings() {
+    const Navigate = useNavigate()
+    const { state } = useLocation()
     const [loading, setloading] = useState(true)
     const [orders, setorders] = useState([])
     let count = 0
     const Aauth = window.localStorage.getItem("Aauth")
-    
+
     async function getorders() {
         try {
-            const { data } = await axios.get("http://anacabs-backend.vercel.app/api/bookings", {
+            const { data } = await axios.post("https://anacabs.herokuapp.com/api/bookings/userorders", { uname: state.uname }, {
                 headers: {
                     "Authorization": `Bearer ${Aauth}`
                 }
@@ -47,8 +48,7 @@ function Btable() {
                                     <th>From</th>
                                     <th>To</th>
                                     <th>Phone Number</th>
-                                    <th>Driver</th>
-                                    <th>Ststus</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -61,7 +61,6 @@ function Btable() {
                                             <td>{o.from}</td>
                                             <td>{o.to}</td>
                                             <td>{o.pnumber}</td>
-                                            <td>{o.did}</td>
                                             <td>{o.status}</td>
                                         </tr>
                                     )
@@ -81,4 +80,4 @@ function Btable() {
     );
 }
 
-export default Btable;
+export default Userbookings;

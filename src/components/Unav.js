@@ -1,8 +1,8 @@
 import React from "react";
-import { useNavigate, Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
-function Dnav() {
-    const Navigate = useNavigate();
+function Unav() {
+    const Navigate = useNavigate()
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-light">
@@ -17,20 +17,21 @@ function Dnav() {
                         <form className="d-flex">
                             <div>
                                 <Link className="btn"
-                                    to={"/dprofile"}>My Profile</Link>
+                                    to={"/mybookings"}>My Bookings</Link>
+                                <Link className="btn"
+                                    to={"/uprofile"}>My Profile</Link>
                                 <button className="btn btn-outline-danger"
                                     onClick={() => {
                                         window.localStorage.clear();
-                                        Navigate("/dlogin", { replace: true })
-                                    }}>Logout</button>{" "}
+                                        Navigate("/", { replace: true })
+                                    }}>Logout</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </nav>
-            <br />
         </>
     );
 }
 
-export default Dnav;
+export default Unav;

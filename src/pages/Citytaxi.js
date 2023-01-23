@@ -1,12 +1,12 @@
 import React from "react";
 import Citybook from "../components/Citybook";
 import Homefooter from "../components/Homefooter";
-import Navbar from "../components/Navbar";
+import Unav from "../components/Unav";
 
 function Citytaxi() {
     return (
         <>
-            <Navbar />
+            <Unav />
             <div className="container">
                 <div className="row">
                     <Citybook />

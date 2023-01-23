@@ -8,6 +8,7 @@ function Dotable() {
     let count = 0
     const Navigate = useNavigate();
     const Dauth = window.localStorage.getItem("Dauth")
+
     async function getDorders() {
         try {
             const { data } = await axios.get("http://anacabs-backend.vercel.app/api/bookings/porders", {
@@ -15,8 +16,8 @@ function Dotable() {
                     "Authorization": `Bearer ${Dauth}`
                 }
             });
-            setorders(data);
             setloading(false)
+            setorders(data);
         } catch ({ response: { data, status } }) {
             if (status == "403" || status == "401") {
                 window.localStorage.clear();
@@ -27,6 +28,7 @@ function Dotable() {
             }
         }
     }
+
     async function Ordershistory(Order) {
         try {
             const { data } = await axios.put(`http://anacabs-backend.vercel.app/api/bookings/didput/${Order._id}`, Order, {
@@ -46,9 +48,11 @@ function Dotable() {
             }
         }
     }
+
     useEffect(() => {
         getDorders();
     }, []);
+    
     return (
         <>
             <div className="container">

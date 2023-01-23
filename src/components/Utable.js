@@ -2,22 +2,43 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 
-function Btable() {
-    const Navigate = useNavigate();
+function Utable() {
+    const Navigate = useNavigate()
     const [loading, setloading] = useState(true)
-    const [orders, setorders] = useState([])
+    const [users, setusers] = useState([])
     let count = 0
     const Aauth = window.localStorage.getItem("Aauth")
-    
-    async function getorders() {
+
+    async function getusers() {
         try {
-            const { data } = await axios.get("http://anacabs-backend.vercel.app/api/bookings", {
+            const { data } = await axios.get("https://anacabs.herokuapp.com/api/users", {
                 headers: {
                     "Authorization": `Bearer ${Aauth}`
                 }
             });
             setloading(false)
-            setorders(data);
+            setusers(data);
+        } catch ({ response: { data, status } }) {
+            if (status == "403" || status == "401") {
+                window.localStorage.clear();
+                Navigate("/dlogin", { replace: true })
+            }
+            else {
+                alert(data.error)
+            }
+        }
+    }
+
+    async function udelete(u) {
+        try {
+            if (window.confirm(`Delete ${u.uname}`)) {
+                const { data } = await axios.delete(`https://anacabs.herokuapp.com/api/users/${u._id}`, {
+                    headers: {
+                        "Authorization": `Bearer ${Aauth}`
+                    }
+                });
+                getusers()
+            }
         } catch ({ response: { data, status } }) {
             if (status == "403" || status == "401") {
                 window.localStorage.clear();
@@ -30,7 +51,7 @@ function Btable() {
     }
 
     useEffect(() => {
-        getorders();
+        getusers();
     }, []);
 
     return (
@@ -42,27 +63,21 @@ function Btable() {
                             <thead>
                                 <tr>
                                     <th>S.no</th>
-                                    <th>Time</th>
-                                    <th>Date</th>
-                                    <th>From</th>
-                                    <th>To</th>
+                                    <th>Name</th>
+                                    <th>User Name</th>
                                     <th>Phone Number</th>
-                                    <th>Driver</th>
-                                    <th>Ststus</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {orders.map((o) => {
+                                {users.map((u) => {
                                     return (
-                                        <tr key={o._id}>
+                                        <tr key={u._id} onClick={() => Navigate("/users/orders", { state: { uname: u.uname } })}>
                                             <td>{++count}</td>
-                                            <td>{o.time}</td>
-                                            <td>{o.date}</td>
-                                            <td>{o.from}</td>
-                                            <td>{o.to}</td>
-                                            <td>{o.pnumber}</td>
-                                            <td>{o.did}</td>
-                                            <td>{o.status}</td>
+                                            <td>{u.fname}</td>
+                                            <td>{u.uname}</td>
+                                            <td>{u.pnumber}</td>
+                                            <td><button className="btn btn-outline-secondary" onClick={() => udelete(u)}>Delete</button></td>
                                         </tr>
                                     )
                                 })}
@@ -81,4 +96,4 @@ function Btable() {
     );
 }
 
-export default Btable;
+export default Utable

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import swal from 'sweetalert2';
 import { AformContext } from "./Ucontext"
 import axios from "axios";
@@ -7,14 +7,54 @@ import axios from "axios";
 function Cityvar() {
     const { Aform, Achange } = useContext(AformContext)
     const Navigate = useNavigate()
+    const Uauth = window.localStorage.getItem("Uauth")
 
     async function Asubmit(event) {
         try {
             event.preventDefault();
-            const { data } = await axios.post("http://anacabs-backend.vercel.app/api/bookings", Aform)
+<<<<<<< HEAD
+            const { data } = await axios.post("https://anacabs-backend.vercel.app/api/bookings", Aform)
+=======
+            const { data } = await axios.post("https://anacabs-backend.vercel.app/api/bookings", Aform, {
+                headers: {
+                    "Authorization": `Bearer ${Uauth}`
+                }
+            })
+>>>>>>> 6cacd21ebda298ff15c07979879184385a795d97
             Sweet()
-        } catch ({ response: { data } }) {
-            alert(data.error)
+        } catch ({ response: { data, status } }) {
+            if (status == "403" || status == "401") {
+                window.localStorage.clear();
+                Navigate("/", { replace: true })
+            }
+            else {
+                alert(data.error)
+            }
+        }
+    }
+
+    async function otp() {
+        try {
+            const { data } = await axios.post("https://anacabs-backend.vercel.app/api/bookings/otp", { pnumber: Aform.pnumber }, {
+                headers: {
+                    "Authorization": `Bearer ${Uauth}`
+                }
+            })
+            console.log(data)
+            if (data) {
+                swal.fire({
+                    text: { data },
+                    icon: "success",
+                })
+            }
+        } catch ({ response: { data, status } }) {
+            if (status == "403" || status == "401") {
+                window.localStorage.clear();
+                Navigate("/", { replace: true })
+            }
+            else {
+                alert(data.error)
+            }
         }
     }
 
@@ -23,10 +63,9 @@ function Cityvar() {
             text: `You order is confirmed!
             Our driver will call you`,
             icon: "success",
+        }).then(() => {
+            Navigate("/mybookings", { replace: true });
         })
-            .then(() => {
-                Navigate("/", { replace: true });
-            })
     }
     return (
         <>
@@ -52,8 +91,9 @@ function Cityvar() {
                             </div>
                             <br />
                             <div style={{ display: "flex" }}>
-                                <Link className="btn btn-outline-success" to="">Send OTP</Link>{" "}
-                                <input style={{ width: 300 }} id="OTP" type="tel" className="form-control" placeholder="Enter the OTP" required="required" />
+                                <button className="btn btn-outline-success" onClick={otp}>Send OTP</button>{" "}
+                                <input style={{ width: 300 }} id="OTP" type="number" name="otp" className="form-control" placeholder="Enter the OTP"
+                                    onChange={Achange} />
                             </div>
                             <br />
                             <button type="submit" className="btn btn-outline-success" >Confirm Your Cab</button>

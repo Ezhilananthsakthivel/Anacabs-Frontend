@@ -14,14 +14,13 @@ function Anav() {
                         <p style={{ fontSize: "larger", fontWeight: 900 }}>Ana Cabs Point</p>
                     </div>
                     <div>
-
                         <form className="d-flex">
                             <div>
                                 <button className="btn btn-outline-danger"
                                     onClick={() => {
                                         window.localStorage.clear();
                                         Navigate("/alogin", { replace: true })
-                                    }}>Log out</button>{" "}
+                                    }}>Logout</button>{" "}
                             </div>
                         </form>
                     </div>

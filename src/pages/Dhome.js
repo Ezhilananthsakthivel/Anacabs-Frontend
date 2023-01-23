@@ -22,7 +22,7 @@ function Dhome() {
                         <Link to={"/dhistory"} className="card" style={{ width: "13rem" }}>
                             <img height={150} src="./images/dhistory3.jpg" className="card-img-top" alt="..." />
                             <div className="card-body">
-                                <p className="card-text text-center"><b>History</b></p>
+                                <p className="card-text text-center"><b>My Orders</b></p>
                             </div>
                         </Link>
                     </div>
