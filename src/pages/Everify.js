@@ -7,7 +7,7 @@ function Everify() {
     const params = useParams()
 
     // (async function(){
-    //     const data = await axios.get(`http://localhost:3001/api/auth/${params.id}/verify/${params.token}`)
+    //     const data = await axios.get(`https://anacabs-backend.vercel.app/api/auth/${params.id}/verify/${params.token}`)
     // }())
 
     return (

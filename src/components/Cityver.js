@@ -12,7 +12,7 @@ function Cityvar() {
     async function Asubmit(event) {
         try {
             event.preventDefault();
-            const { data } = await axios.post("http://localhost:3001/api/bookings", Aform, {
+            const { data } = await axios.post("https://anacabs-backend.vercel.app/api/bookings", Aform, {
                 headers: {
                     "Authorization": `Bearer ${Uauth}`
                 }
@@ -31,7 +31,7 @@ function Cityvar() {
 
     async function otp() {
         try {
-            const { data } = await axios.post("http://localhost:3001/api/bookings/otp", { pnumber: Aform.pnumber }, {
+            const { data } = await axios.post("https://anacabs-backend.vercel.app/api/bookings/otp", { pnumber: Aform.pnumber }, {
                 headers: {
                     "Authorization": `Bearer ${Uauth}`
                 }

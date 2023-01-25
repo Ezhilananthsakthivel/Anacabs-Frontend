@@ -11,7 +11,7 @@ function Dhtable() {
 
     async function didorders() {
         try {
-            const { data } = await axios.get("http://localhost:3001/api/bookings/didorders", {
+            const { data } = await axios.get("https://anacabs-backend.vercel.app/api/bookings/didorders", {
                 headers: {
                     "Authorization": `Bearer ${Dauth}`
                 }
@@ -32,7 +32,7 @@ function Dhtable() {
     async function Ocomplete(Order) {
         try {
             setloading(true)
-            const { data } = await axios.put(`http://localhost:3001/api/bookings/cupdate/${Order._id}`, Order, {
+            const { data } = await axios.put(`https://anacabs-backend.vercel.app/api/bookings/cupdate/${Order._id}`, Order, {
                 headers: {
                     "Authorization": `Bearer ${Dauth}`
                 }

@@ -12,7 +12,7 @@ function Uprofile() {
 
     async function profile() {
         try {
-            const { data } = await axios.get("http://localhost:3001/api/users/myprofile", {
+            const { data } = await axios.get("https://anacabs-backend.vercel.app/api/users/myprofile", {
                 headers: {
                     "Authorization": `Bearer ${Uauth}`
                 }

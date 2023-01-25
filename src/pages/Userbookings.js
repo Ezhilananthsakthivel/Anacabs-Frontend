@@ -12,7 +12,7 @@ function Userbookings() {
 
     async function getorders() {
         try {
-            const { data } = await axios.post("http://localhost:3001/api/bookings/userorders", { uname: state.uname }, {
+            const { data } = await axios.post("https://anacabs-backend.vercel.app/api/bookings/userorders", { uname: state.uname }, {
                 headers: {
                     "Authorization": `Bearer ${Aauth}`
                 }

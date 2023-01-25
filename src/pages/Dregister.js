@@ -24,7 +24,7 @@ function Dregister() {
     const Aauth = window.localStorage.getItem("Aauth")
     const creatdriver = async () => {
         try {
-            const { data } = await axios.post("http://localhost:3001/api/drivers/register", Reg, {
+            const { data } = await axios.post("https://anacabs-backend.vercel.app/api/drivers/register", Reg, {
                 headers: {
                     "Authorization": `Bearer ${Aauth}`
                 }
