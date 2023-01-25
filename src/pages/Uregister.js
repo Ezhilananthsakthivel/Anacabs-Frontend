@@ -17,7 +17,7 @@ function Uregister() {
     const Navigate = useNavigate()
     const [Reg, setReg] = useState(formInitial)
     const [Loading, setLoading] = useState(false)
-    const [Res,setRes] = ""
+    const [Res, setRes] = ""
 
     function Uchange({ target: { value, name } }) {
         setReg({ ...Reg, [name]: value })
@@ -25,25 +25,26 @@ function Uregister() {
 
     async function creatuser() {
         try {
-            const { data } = await axios.post("https://anacabs-backend.vercel.app/api/auth/register", Reg)
-            Sweet()
+            const { data } = await axios.post("http://localhost:3001/api/auth/register", Reg)
+
         } catch ({ response: { data } }) {
             alert(data.error)
         }
     }
 
-    function Usubmit(event) {
-        event.preventDefault();
-        creatuser()
-    }
-
     function Sweet() {
         swal.fire({
-            text: ``,
+            text: `Verify your mail Check your account`,
             icon: "success",
         }).then(() => {
             Navigate("/login", { replace: true });
         })
+    }
+
+    function Usubmit(event) {
+        event.preventDefault();
+        creatuser()
+        Sweet()
     }
 
     return (

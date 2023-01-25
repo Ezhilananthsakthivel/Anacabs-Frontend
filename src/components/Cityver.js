@@ -12,15 +12,11 @@ function Cityvar() {
     async function Asubmit(event) {
         try {
             event.preventDefault();
-<<<<<<< HEAD
-            const { data } = await axios.post("https://anacabs-backend.vercel.app/api/bookings", Aform)
-=======
-            const { data } = await axios.post("https://anacabs-backend.vercel.app/api/bookings", Aform, {
+            const { data } = await axios.post("http://localhost:3001/api/bookings", Aform, {
                 headers: {
                     "Authorization": `Bearer ${Uauth}`
                 }
             })
->>>>>>> 6cacd21ebda298ff15c07979879184385a795d97
             Sweet()
         } catch ({ response: { data, status } }) {
             if (status == "403" || status == "401") {
@@ -35,7 +31,7 @@ function Cityvar() {
 
     async function otp() {
         try {
-            const { data } = await axios.post("https://anacabs.herokuapp.com/api/bookings/otp", { pnumber: Aform.pnumber }, {
+            const { data } = await axios.post("http://localhost:3001/api/bookings/otp", { pnumber: Aform.pnumber }, {
                 headers: {
                     "Authorization": `Bearer ${Uauth}`
                 }

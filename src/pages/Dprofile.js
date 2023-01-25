@@ -12,7 +12,7 @@ function Dprofile() {
 
     async function profile() {
         try {
-            const { data } = await axios.get("https://anacabs-backend.vercel.app/api/drivers/myprofile", {
+            const { data } = await axios.get("http://localhost:3001/api/drivers/myprofile", {
                 headers: {
                     "Authorization": `Bearer ${Dauth}`
                 }

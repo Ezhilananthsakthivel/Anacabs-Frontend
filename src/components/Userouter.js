@@ -9,6 +9,7 @@ import AformProvider from "./Ucontext";
 import { Uprivateroute } from "./Privateroute"
 import Mybookings from "../pages/Mybookings";
 import Uprofile from "../pages/Uprofile";
+import Everify from "../pages/Everify"
 
 function Userouter() {
     return (
@@ -16,6 +17,7 @@ function Userouter() {
             <Routes>
                 <Route path={"/login"} element={<Ulogin />} />
                 <Route path={"/register"} element={<Uregister />} />
+                <Route path={"/:id/verify/:token"} element={<Everify />} />
                 <Route path={"/"} element={<Home />} />
                 <Route path={"/home"} element={<Navigate to={"/"} />} />
                 <Route path={"/citytaxi"} element={<Uprivateroute><Citytaxi /></Uprivateroute>} />
